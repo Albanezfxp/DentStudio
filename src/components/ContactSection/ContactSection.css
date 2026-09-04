@@ -1,0 +1,111 @@
+/* CTA FINAL — fundo mais escuro, mesmo vocabulário do hero levado ao volume
+   máximo: numeração gravada, nome em serifada grande, filete que acende.
+   Sem card, sem sombra, sem preenchimento dourado. */
+
+.cta__head {
+  max-width: 780px;
+}
+
+.cta__head h2 {
+  margin-top: var(--sp-sm);
+}
+
+.cta__lead {
+  margin-top: var(--sp-sm);
+  max-width: 50ch;
+  font-size: var(--fs-lead);
+}
+
+.cta__pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4vw, 72px);
+  margin-top: clamp(52px, 7vw, 96px);
+}
+
+.cta__plate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: var(--sp-md);
+  border-top: 1px solid var(--rule-gold);
+  transition: border-color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+
+.cta__plate:hover {
+  border-top-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.cta__num {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 1.6rem + 5vw, 5.5rem);
+  font-weight: 500;
+  line-height: 0.9;
+  color: rgba(210, 181, 131, 0.17);
+  transition: color var(--t) var(--ease), -webkit-text-stroke-color var(--t) var(--ease);
+}
+
+@supports (-webkit-text-stroke: 1px currentColor) {
+  .cta__num {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold-deep);
+  }
+
+  .cta__plate:hover .cta__num {
+    -webkit-text-stroke-color: var(--gold);
+  }
+}
+
+.cta__name {
+  margin-top: var(--sp-sm);
+  max-width: 14ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.35rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: var(--track-display);
+  color: var(--text-hi);
+}
+
+.cta__focus {
+  margin-top: var(--sp-xs);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.06em;
+  color: var(--text-mute);
+}
+
+.cta__go {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  margin-top: var(--sp-md);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-gold);
+  color: var(--gold);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: var(--track-nav);
+  line-height: 1;
+  transition: border-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+.cta__plate:hover .cta__go {
+  border-bottom-color: var(--gold);
+  color: var(--gold-hi);
+}
+
+.cta__plate:hover .cta__arrow {
+  transform: translateX(5px);
+}
+
+@media (max-width: 760px) {
+  .cta__pair {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-lg);
+  }
+
+  .cta__name {
+    max-width: none;
+  }
+}

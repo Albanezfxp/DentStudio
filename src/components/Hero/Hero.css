@@ -1,0 +1,273 @@
+/* HERO — fundo mais escuro da página, reservado ao primeiro pico.
+   O par de retratos é um díptico: sangra até a borda direita, separado por um
+   único filete champanhe. Passar o olho em um dos dois apaga o outro. */
+
+.hero {
+  position: relative;
+  background: var(--ground-abyss);
+  overflow: hidden;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    'head pair'
+    'index pair';
+  column-gap: clamp(32px, 4vw, 76px);
+  min-height: calc(100svh - 74px);
+  padding-top: 128px;
+}
+
+.hero__head {
+  grid-area: head;
+  align-self: end;
+  padding-bottom: var(--sp-lg);
+  max-width: 640px;
+}
+
+.hero__head h1 {
+  margin-top: var(--sp-sm);
+  max-width: 16ch;
+}
+
+.hero__head em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+.hero__lead {
+  margin-top: var(--sp-sm);
+  max-width: 44ch;
+  font-size: var(--fs-lead);
+  color: var(--text);
+}
+
+.hero__index {
+  grid-area: index;
+  padding-bottom: clamp(52px, 7vh, 88px);
+  border-top: 1px solid var(--rule-gold);
+  max-width: 640px;
+}
+
+.hero__index li + li {
+  border-top: 1px solid var(--rule);
+}
+
+.hero__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding-block: var(--sp-sm);
+  transition: opacity var(--t) var(--ease);
+}
+
+.hero__row-num {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+
+.hero__row-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.hero__row-name {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-hi);
+  line-height: 1.3;
+  transition: color var(--t) var(--ease);
+}
+
+.hero__row-focus {
+  font-size: var(--fs-caption);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--text-mute);
+  line-height: 1.4;
+}
+
+.hero__row-arrow {
+  color: var(--gold);
+  opacity: 0.5;
+  transition: transform var(--t) var(--ease), opacity var(--t) var(--ease);
+}
+
+.hero__row:hover .hero__row-arrow,
+.hero__row:focus-visible .hero__row-arrow {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+/* Sangra até a borda direita da tela e sobe por trás do cabeçalho.
+   Margem percentual num item de grid resolve contra a ÁREA da grid, então o
+   avanço é calculado a partir da goteira e da sobra do contêiner. */
+.hero__pair {
+  grid-area: pair;
+  position: relative;
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: -128px;
+  margin-right: calc(-1 * (var(--gutter) + max(0px, (100vw - var(--shell)) / 2)));
+}
+
+/* Escurece o topo do díptico para a navegação nunca disputar com a foto. */
+.hero__pair::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 3;
+  height: 200px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(6, 9, 14, 0.86), rgba(6, 9, 14, 0));
+}
+
+.hero__fig {
+  position: relative;
+  display: block;
+  min-height: 0;
+  transition: opacity var(--t-slow) var(--ease);
+}
+
+.hero__fig + .hero__fig {
+  border-left: 1px solid var(--rule-gold);
+}
+
+.hero__portrait {
+  position: absolute;
+  inset: 0;
+  --portrait-foot: var(--ground-abyss);
+}
+
+.hero__fig-tag {
+  position: absolute;
+  left: clamp(16px, 2vw, 26px);
+  bottom: clamp(96px, 13vh, 148px);
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-hi);
+}
+
+.hero__fig-num {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  letter-spacing: 0;
+  color: var(--gold);
+}
+
+/* O gesto assinatura do hero: escolher um é apagar o outro. Vale para
+   ponteiro e para teclado, e o alvo pode ser a linha do índice ou a foto. */
+.hero__inner:has([data-doctor='dr-thomas']:hover) [data-doctor='dr-gabriel'],
+.hero__inner:has([data-doctor='dr-thomas']:focus-visible) [data-doctor='dr-gabriel'],
+.hero__inner:has([data-doctor='dr-gabriel']:hover) [data-doctor='dr-thomas'],
+.hero__inner:has([data-doctor='dr-gabriel']:focus-visible) [data-doctor='dr-thomas'] {
+  opacity: 0.3;
+}
+
+.hero__inner:has([data-doctor='dr-thomas']:hover) .hero__fig[data-doctor='dr-thomas'],
+.hero__inner:has([data-doctor='dr-gabriel']:hover) .hero__fig[data-doctor='dr-gabriel'] {
+  opacity: 1;
+}
+
+.hero__fig:hover .portrait__img,
+.hero__fig:focus-visible .portrait__img {
+  filter: saturate(0.85) contrast(1.02) brightness(0.92);
+}
+
+/* Faixa de rodapé do hero: fatos reais, nunca métrica inventada. */
+
+.hero__base {
+  border-top: 1px solid var(--rule-gold);
+  background: var(--ground-abyss);
+}
+
+.hero__base-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  padding-block: 26px;
+}
+
+.hero__base-item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+@media (max-width: 980px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      'head'
+      'pair'
+      'index';
+    min-height: 0;
+    padding-top: 116px;
+    padding-right: var(--gutter);
+    row-gap: var(--sp-lg);
+  }
+
+  .hero__head {
+    padding-bottom: 0;
+  }
+
+  .hero__pair {
+    margin-top: 0;
+    margin-inline: calc(-1 * var(--gutter));
+    height: min(58vh, 460px);
+    border-block: 1px solid var(--rule-gold);
+  }
+
+  .hero__pair::before {
+    display: none;
+  }
+
+  .hero__index {
+    padding-bottom: var(--sp-lg);
+  }
+
+  .hero__fig-tag {
+    bottom: clamp(18px, 4vh, 34px);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero__inner {
+    padding-top: 104px;
+  }
+
+  .hero__pair {
+    height: 52vh;
+  }
+
+  .hero__base-inner {
+    padding-block: 20px;
+  }
+
+  .hero__base-item {
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+  }
+}

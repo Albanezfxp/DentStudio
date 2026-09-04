@@ -1,0 +1,476 @@
+/* DentStudio — sistema de design "Índice".
+   Único lugar onde vivem cor, tipografia, espaçamento e movimento.
+   Nenhum componente inventa valor próprio; todos consomem daqui. */
+
+:root {
+  /* #233B56 é o pixel exato de src/assets/clinic_logo/blueWthite.png.
+     Toda a escala escura abaixo nasce do matiz dele (H 212), nunca de preto
+     neutro: o fundo é a marca sub-exposta, não um cinza qualquer. */
+  --brand: #233b56;
+  --brand-deep: #16283b;
+  --brand-line: rgba(47, 76, 110, 0.55);
+
+  /* Três degraus, e a ordem importa: o mais escuro é reservado aos dois
+     picos da página (hero e CTA final) e ao rodapé. */
+  --ground-abyss: #06090e;
+  --ground: #0b1119;
+  --ground-raised: #101a25;
+  --ground-veil: rgba(6, 9, 14, 0.78);
+
+  /* Champanhe: quente, dessaturado, longe de amarelo. Regra do sistema:
+     desenha linha, nunca preenche superfície. */
+  --gold: #d2b583;
+  --gold-hi: #efddba;
+  --gold-deep: #a28253;
+  --rule-gold: rgba(210, 181, 131, 0.26);
+  --rule-gold-lit: rgba(210, 181, 131, 0.62);
+  --rule: rgba(169, 183, 198, 0.13);
+  --rule-strong: rgba(169, 183, 198, 0.22);
+
+  /* Off-white levemente quente nos títulos (conversa com o champanhe);
+     corpo em cinza tintado pelo matiz da marca, nunca cinza neutro. */
+  --text-hi: #f2efea;
+  --text: #a9b7c6;
+  --text-mute: #7a8b9f;
+
+  /* Jost é o parente tipográfico do próprio letreiro DentStudio: geométrica,
+     fina, de caixa alta espaçada. Bodoni Moda entra como o contraponto
+     gravado — a letra da joalheria e da relojoaria. */
+  --font-display: "Bodoni Moda", "Didot", "Times New Roman", serif;
+  --font-sans: "Jost", system-ui, "Segoe UI", Roboto, sans-serif;
+
+  --fs-display: clamp(2.75rem, 1.4rem + 4.6vw, 5.25rem);
+  --fs-heading: clamp(2.1rem, 1.35rem + 3vw, 3.85rem);
+  --fs-title: clamp(1.35rem, 1.12rem + 0.95vw, 1.95rem);
+  --fs-lead: clamp(1.03rem, 0.96rem + 0.32vw, 1.22rem);
+  --fs-body: clamp(0.95rem, 0.92rem + 0.15vw, 1.02rem);
+  --fs-label: 0.6875rem;
+  --fs-caption: 0.8125rem;
+  --fs-numeral: clamp(5rem, 2.2rem + 10vw, 12rem);
+
+  --track-label: 0.28em;
+  --track-nav: 0.16em;
+  --track-display: -0.015em;
+
+  --lh-display: 0.98;
+  --lh-heading: 1.06;
+  --lh-body: 1.75;
+
+  /* O tema depende de respiro: a escala é deliberadamente generosa e o
+     ritmo vertical das seções é a decisão de layout mais importante. */
+  --sp-3xs: 4px;
+  --sp-2xs: 8px;
+  --sp-xs: 14px;
+  --sp-sm: 22px;
+  --sp-md: 34px;
+  --sp-lg: 52px;
+  --sp-xl: 80px;
+  --sp-2xl: 120px;
+  --sp-3xl: 168px;
+
+  --section-y: clamp(96px, 10.5vw, 172px);
+  --section-y-tight: clamp(72px, 7vw, 112px);
+  --shell: 1240px;
+  --gutter: clamp(22px, 5vw, 68px);
+
+  /* Uma curva só para toda a página. Nada elástico, nada com bounce. */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 180ms;
+  --t: 320ms;
+  --t-slow: 760ms;
+
+  /* O losango de quatro pontas é levantado do letreiro real da marca. É o
+     único enfeite que o sistema possui — não existe emoji nesta página. */
+  --sparkle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12.6 6.6 17.4 11.4 24 12 17.4 12.6 12.6 17.4 12 24 11.4 17.4 6.6 12.6 0 12 6.6 11.4 11.4 6.6 12 0Z' fill='%23d2b583'/%3E%3C/svg%3E");
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 300;
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--text-hi);
+  letter-spacing: var(--track-display);
+  line-height: var(--lh-heading);
+  font-optical-sizing: auto;
+}
+
+h1 {
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+}
+
+h2 {
+  font-size: var(--fs-heading);
+}
+
+h3 {
+  font-size: var(--fs-title);
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+address {
+  font-style: normal;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+iframe {
+  border: 0;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ground-abyss);
+}
+
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 4px;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+.section--tight {
+  padding-block: var(--section-y-tight);
+}
+
+.section--abyss {
+  background: var(--ground-abyss);
+}
+
+.section--raised {
+  background: var(--ground-raised);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 14px 22px;
+  background: var(--ground-abyss);
+  border: 1px solid var(--gold);
+  color: var(--text-hi);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--track-nav);
+  text-transform: uppercase;
+}
+
+.skip-link:focus {
+  left: var(--gutter);
+  top: 14px;
+}
+
+/* Etiqueta: caixa alta muito espaçada, precedida de um traço-índice.
+   Recurso clássico de identidade de luxo, usado com parcimônia. */
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.label::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: var(--rule-gold-lit);
+  flex: none;
+}
+
+.label--bare::before {
+  display: none;
+}
+
+.label--muted {
+  color: var(--text-mute);
+}
+
+.label--muted::before {
+  background: var(--rule-strong);
+}
+
+/* Losango de quatro pontas: o ornamento único do sistema. */
+.sparkle {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex: none;
+  background: var(--sparkle) center / contain no-repeat;
+}
+
+.rule {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: var(--rule);
+}
+
+.rule--gold {
+  background: var(--rule-gold);
+}
+
+/* Filete com marca de índice numa das pontas — o tique do mostrador. */
+.rule--tick {
+  position: relative;
+}
+
+.rule--tick::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: var(--rule-gold-lit);
+}
+
+/* O champanhe desenha o contorno; o hover acende o contorno e ergue 2px.
+   Uma linguagem de hover só, repetida na página inteira. */
+
+.btn {
+  --btn-py: 17px;
+  --btn-px: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-xs);
+  padding: var(--btn-py) var(--btn-px);
+  border: 1px solid var(--rule-gold);
+  color: var(--text-hi);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--track-nav);
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    border-color var(--t) var(--ease),
+    color var(--t) var(--ease),
+    transform var(--t) var(--ease);
+}
+
+.btn:hover {
+  border-color: var(--gold);
+  color: var(--gold-hi);
+  transform: translateY(-2px);
+}
+
+.btn--lg {
+  --btn-py: 22px;
+  --btn-px: 40px;
+  font-size: 0.8125rem;
+}
+
+.btn--plain {
+  border-color: var(--rule-strong);
+}
+
+.btn--plain:hover {
+  border-color: var(--text);
+  color: var(--text-hi);
+}
+
+/* Ação sem moldura: só texto, filete e seta. */
+.btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2xs);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule-gold);
+  color: var(--text-hi);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--track-nav);
+  text-transform: uppercase;
+  line-height: 1;
+  transition:
+    border-color var(--t) var(--ease),
+    color var(--t) var(--ease);
+}
+
+.btn-quiet:hover {
+  border-color: var(--gold);
+  color: var(--gold-hi);
+}
+
+/* Seta de linha fina — desliza 4px no hover do pai. */
+.arrow {
+  display: inline-block;
+  flex: none;
+  transition: transform var(--t) var(--ease);
+}
+
+.btn:hover .arrow,
+.btn-quiet:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Revelação ao rolar: só transform e opacity. O conteúdo nasce visível — a
+   classe .is-armed só é aplicada por JS, então sem JS ou com reduced-motion
+   nada some. */
+
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.is-armed .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--t-slow) var(--ease-soft),
+    transform var(--t-slow) var(--ease-soft);
+  transition-delay: calc(var(--reveal-step, 0) * 90ms);
+}
+
+.is-armed .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .is-armed .reveal,
+  .is-armed .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* As fotos são jpg com o fundo real da recepção. Para que a figura pertença
+   ao fundo escuro em vez de flutuar dentro de um card, ela é rebaixada,
+   tingida com o azul da marca e dissolvida na base por uma máscara. */
+
+.portrait {
+  position: relative;
+  overflow: hidden;
+  background: var(--ground-abyss);
+}
+
+.portrait__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--portrait-pos, center 30%);
+  transform: scale(var(--portrait-zoom, 1));
+  transform-origin: center top;
+  /* A revelação é regulável por seção: no hero a foto é fundo para a
+     tipografia e entra baixa; no perfil o rosto é o assunto e sobe. */
+  filter: saturate(var(--portrait-sat, 0.6)) contrast(var(--portrait-con, 1.05))
+    brightness(var(--portrait-bri, 0.76));
+  transition:
+    filter var(--t-slow) var(--ease),
+    transform var(--t-slow) var(--ease);
+}
+
+/* Véu azul-marinho: cola a foto ao fundo e mata o branco da recepção.
+   A última parada do gradiente é a cor exata da seção — é o que faz a figura
+   se dissolver na base em vez de terminar num corte reto. */
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(6, 9, 14, var(--portrait-scrim, 0.5)) 0%,
+      rgba(6, 9, 14, calc(var(--portrait-scrim, 0.5) * 0.16)) 30%,
+      rgba(6, 9, 14, 0.62) 72%,
+      var(--portrait-foot, var(--ground-abyss)) 93%,
+      var(--portrait-foot, var(--ground-abyss)) 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(35, 59, 86, var(--portrait-tint, 0.4)),
+      rgba(22, 40, 59, calc(var(--portrait-tint, 0.4) * 0.45))
+    );
+}

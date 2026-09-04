@@ -1,0 +1,73 @@
+/* A CLÍNICA — menor e mais quieta que os perfis, de propósito.
+   O letreiro entra como colofão: dois filetes e muito ar em volta. */
+
+.clinic__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  column-gap: clamp(40px, 6vw, 104px);
+  align-items: center;
+}
+
+.clinic__mark {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-md);
+  padding-block: clamp(48px, 7vw, 90px);
+  border-block: 1px solid var(--rule-gold);
+}
+
+.clinic__mark img {
+  width: min(330px, 82%);
+  height: auto;
+  opacity: 0.92;
+}
+
+.clinic__mark-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  text-align: center;
+}
+
+/* A clínica é o contexto, não o protagonista: o título vive um degrau
+   abaixo do nome dos dentistas. */
+.clinic__body h2 {
+  margin-top: var(--sp-sm);
+  max-width: 14ch;
+  font-size: clamp(1.7rem, 1.2rem + 1.8vw, 2.6rem);
+}
+
+.clinic__tagline {
+  margin-top: var(--sp-sm);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.7rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--gold);
+}
+
+.clinic__text {
+  margin-top: var(--sp-sm);
+  max-width: 52ch;
+}
+
+.clinic__link {
+  margin-top: var(--sp-md);
+}
+
+@media (max-width: 900px) {
+  .clinic__inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--sp-lg);
+  }
+
+  .clinic__body h2 {
+    max-width: none;
+  }
+}

@@ -1,0 +1,159 @@
+/* PERFIL — o retrato não entra em card nenhum. Ele é rebaixado até pertencer
+   ao fundo e se dissolve na base; um filete champanhe atravessa a seção
+   inteira e some por trás da figura, como se ela estivesse apoiada nele. */
+
+.doc {
+  --portrait-foot: var(--ground);
+  position: relative;
+  overflow: hidden;
+}
+
+.doc--rev {
+  --portrait-foot: var(--ground-raised);
+}
+
+.doc__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-areas: "fig body";
+  column-gap: clamp(40px, 6vw, 104px);
+  align-items: center;
+}
+
+.doc--rev .doc__inner {
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  grid-template-areas: "body fig";
+}
+
+/* O filete que atravessa. Sai da margem do conteúdo e vai até a borda da
+   tela do lado do retrato — assimétrico de propósito. */
+.doc__inner::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 68%;
+  left: calc(50% - 50vw);
+  right: 52%;
+  height: 1px;
+  background: var(--rule-gold);
+}
+
+.doc--rev .doc__inner::before {
+  left: 52%;
+  right: calc(50% - 50vw);
+}
+
+.doc__figure {
+  grid-area: fig;
+  position: relative;
+  z-index: 1;
+}
+
+/* No perfil o retrato sobe um degrau só em relação ao hero: o suficiente para
+   o rosto ganhar presença, sem a foto sair do tom rebaixado da página. */
+.doc__portrait {
+  aspect-ratio: 4 / 5.1;
+  background: transparent;
+  --portrait-bri: 1.1;
+  --portrait-sat: 0.66;
+  --portrait-scrim: 0.44;
+  --portrait-tint: 0.36;
+}
+
+.doc__body {
+  grid-area: body;
+  position: relative;
+  z-index: 1;
+}
+
+.doc__name {
+  margin-top: var(--sp-sm);
+  max-width: 13ch;
+}
+
+.doc__facts {
+  margin: var(--sp-md) 0 0;
+  border-top: 1px solid var(--rule-gold);
+}
+
+.doc__fact {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.4fr) minmax(0, 1fr);
+  gap: var(--sp-sm);
+  align-items: baseline;
+  padding-block: var(--sp-xs);
+  border-bottom: 1px solid var(--rule);
+}
+
+.doc__fact dt {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.doc__fact dd {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-hi);
+  line-height: 1.5;
+}
+
+.doc__action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-sm) var(--sp-md);
+  margin-top: var(--sp-lg);
+}
+
+.doc__phone {
+  font-size: var(--fs-caption);
+  letter-spacing: var(--track-nav);
+  color: var(--text-mute);
+}
+
+@media (max-width: 900px) {
+  .doc__inner,
+  .doc--rev .doc__inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "fig"
+      "body";
+    row-gap: var(--sp-lg);
+  }
+
+  /* No mobile o filete vira o divisor entre retrato e ficha. */
+  .doc__inner::before,
+  .doc--rev .doc__inner::before {
+    display: none;
+  }
+
+  .doc__portrait {
+    aspect-ratio: 4 / 4.2;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .doc__name {
+    max-width: none;
+  }
+
+  .doc__fact {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
+@media (max-width: 560px) {
+  .doc__action {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .doc__action .btn {
+    width: 100%;
+  }
+}

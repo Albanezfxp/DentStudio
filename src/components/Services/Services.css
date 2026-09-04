@@ -1,0 +1,162 @@
+/* SERVIÇOS — nenhum card, nenhum ícone, nenhuma sombra.
+   Numeração gravada em contorno (o metal não é preenchido, é vazado),
+   bloco assimétrico com lado alternado e lista tipográfica em filetes. */
+
+.svc {
+  padding-block: var(--section-y) 0;
+}
+
+.svc__head {
+  max-width: 900px;
+}
+
+.svc__head h2 {
+  margin-top: var(--sp-sm);
+}
+
+.svc__lead {
+  margin-top: var(--sp-sm);
+  max-width: 62ch;
+  font-size: var(--fs-lead);
+}
+
+.svc__block {
+  padding-block: clamp(58px, 7vw, 108px);
+}
+
+.svc__block:first-of-type {
+  padding-top: clamp(52px, 6vw, 88px);
+}
+
+/* Cada bloco respira como se fosse quase uma seção própria; o que os separa
+   é um filete champanhe, não um espaço vazio qualquer. */
+.svc__block + .svc__block {
+  border-top: 1px solid var(--rule-gold);
+}
+
+.svc__block:last-of-type {
+  padding-bottom: var(--section-y);
+}
+
+.svc__block-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7.4fr);
+  grid-template-areas: 'mark list';
+  column-gap: clamp(36px, 6vw, 112px);
+  align-items: start;
+}
+
+.svc__block--rev .svc__block-inner {
+  grid-template-columns: minmax(0, 7.4fr) minmax(0, 4fr);
+  grid-template-areas: 'list mark';
+}
+
+.svc__mark {
+  grid-area: mark;
+  position: sticky;
+  top: 128px;
+}
+
+.svc__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-numeral);
+  font-weight: 500;
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  color: rgba(210, 181, 131, 0.17);
+  transition: color var(--t-slow) var(--ease), -webkit-text-stroke-color var(--t-slow) var(--ease);
+}
+
+/* Gravado: o número é contorno, não preenchimento. */
+@supports (-webkit-text-stroke: 1px currentColor) {
+  .svc__num {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold-deep);
+  }
+
+  .svc__block:hover .svc__num {
+    -webkit-text-stroke-color: var(--gold);
+  }
+}
+
+.svc__title {
+  margin-top: var(--sp-sm);
+  max-width: 15ch;
+  font-size: var(--fs-title);
+}
+
+.svc__support {
+  margin-top: var(--sp-xs);
+  padding-top: var(--sp-xs);
+  border-top: 1px solid var(--rule-gold);
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--gold);
+}
+
+.svc__list {
+  grid-area: list;
+  min-width: 0;
+  columns: 2;
+  column-gap: clamp(28px, 4vw, 72px);
+  border-top: 1px solid var(--rule);
+}
+
+.svc__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-sm);
+  padding-block: 15px;
+  border-bottom: 1px solid var(--rule);
+  break-inside: avoid;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text);
+  transition: color var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+
+.svc__item-mark {
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+}
+
+.svc__item:hover {
+  color: var(--text-hi);
+  border-bottom-color: var(--rule-gold-lit);
+}
+
+.svc__item:hover .svc__item-mark {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 900px) {
+  .svc__block-inner,
+  .svc__block--rev .svc__block-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'mark'
+      'list';
+    row-gap: var(--sp-md);
+  }
+
+  .svc__mark {
+    position: static;
+  }
+
+  .svc__title,
+  .svc__support {
+    max-width: none;
+  }
+
+  .svc__list {
+    columns: 1;
+  }
+}

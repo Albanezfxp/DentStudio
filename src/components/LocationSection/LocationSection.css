@@ -1,0 +1,77 @@
+/* LOCALIZAÇÃO — o mapa é o embed real do Google, recolorido por filtro para
+   não abrir um buraco branco no meio do tema escuro. Continua interativo:
+   o véu azul-marinho por cima não recebe ponteiro. */
+
+.loc__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 4.4fr) minmax(0, 7fr);
+  column-gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+
+.loc__plate h2 {
+  margin-top: var(--sp-sm);
+  max-width: 13ch;
+}
+
+.loc__address {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: var(--sp-md);
+  padding-top: var(--sp-sm);
+  border-top: 1px solid var(--rule-gold);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.loc__cta {
+  margin-top: var(--sp-md);
+}
+
+.loc__map {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--rule-gold);
+  overflow: hidden;
+}
+
+.loc__map iframe {
+  width: 100%;
+  height: 100%;
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.4) contrast(0.88) brightness(1.02);
+}
+
+/* Véu da marca: puxa o mapa inteiro para o matiz #233B56. */
+.loc__map::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(35, 59, 86, 0.55);
+  mix-blend-mode: color;
+}
+
+@media (max-width: 900px) {
+  .loc__inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--sp-lg);
+  }
+
+  .loc__plate h2 {
+    max-width: none;
+  }
+
+  .loc__map {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .loc__map {
+    aspect-ratio: 1 / 1;
+  }
+}

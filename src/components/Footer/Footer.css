@@ -1,0 +1,98 @@
+/* RODAPÉ — sóbrio. Um filete no topo, quatro colunas, nenhum peso. */
+
+.foot {
+  background: var(--ground-abyss);
+  border-top: 1px solid var(--rule-gold);
+}
+
+.foot__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+  gap: var(--sp-lg) clamp(28px, 4vw, 64px);
+  padding-block: clamp(56px, 6vw, 88px);
+}
+
+.foot__brand img {
+  width: 190px;
+  height: auto;
+  opacity: 0.9;
+}
+
+.foot__tagline {
+  margin-top: var(--sp-sm);
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.0625rem;
+  color: var(--gold);
+}
+
+.foot__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+.foot__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.foot__col a {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: var(--text);
+  transition: color var(--t) var(--ease);
+}
+
+.foot__col a:hover {
+  color: var(--gold-hi);
+}
+
+.foot__col address {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.foot__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-xs) var(--sp-md);
+  padding-block: var(--sp-sm);
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.foot__bottom-note {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+@media (max-width: 900px) {
+  .foot__inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .foot__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .foot__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .foot__bottom {
+    justify-content: flex-start;
+  }
+}

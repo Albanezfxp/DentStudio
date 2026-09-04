@@ -1,0 +1,172 @@
+/* Cabeçalho — véu translúcido sobre o hero, filete de 1px embaixo.
+   Sem sombra: o que separa o header da página é uma linha, não um card. */
+
+.head {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 90;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background var(--t) var(--ease), border-color var(--t) var(--ease),
+    backdrop-filter var(--t) var(--ease);
+}
+
+.head.is-scrolled {
+  background: var(--ground-veil);
+  border-bottom-color: var(--rule-gold);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+}
+
+.head__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-lg);
+  height: 84px;
+}
+
+.head__brand {
+  flex: none;
+  margin-right: auto;
+}
+
+.head__brand img {
+  height: 34px;
+  width: auto;
+  opacity: 0.95;
+  transition: opacity var(--t) var(--ease);
+}
+
+.head__brand:hover img {
+  opacity: 1;
+}
+
+.head__nav ul {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+.head__nav a {
+  position: relative;
+  display: block;
+  padding-block: 6px;
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: var(--track-nav);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  transition: color var(--t) var(--ease);
+}
+
+/* Sublinhado que se desenha da esquerda — mesmo gesto do resto da página. */
+.head__nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t) var(--ease);
+}
+
+.head__nav a:hover {
+  color: var(--text-hi);
+}
+
+.head__nav a:hover::after {
+  transform: scaleX(1);
+}
+
+.head__cta {
+  --btn-py: 13px;
+  --btn-px: 22px;
+  flex: none;
+}
+
+.head__toggle {
+  display: none;
+  padding: 10px;
+  margin-right: -10px;
+  color: var(--text-hi);
+}
+
+.head__panel {
+  position: fixed;
+  inset: 84px 0 0;
+  background: var(--ground-abyss);
+  border-top: 1px solid var(--rule-gold);
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+}
+
+.head__panel.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+.head__panel-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  padding-block: var(--sp-lg) var(--sp-xl);
+}
+
+.head__panel-nav li + li {
+  border-top: 1px solid var(--rule);
+}
+
+.head__panel-nav a {
+  display: block;
+  padding-block: var(--sp-sm);
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 8vw, 2.4rem);
+  color: var(--text-hi);
+}
+
+.head__panel-foot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  margin-top: var(--sp-xl);
+  padding-top: var(--sp-sm);
+  border-top: 1px solid var(--rule-gold);
+}
+
+.head__panel-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-sm);
+  padding-block: var(--sp-xs);
+  color: var(--gold);
+  font-size: 0.8125rem;
+  letter-spacing: var(--track-nav);
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .head__bar {
+    gap: var(--sp-sm);
+    height: 72px;
+  }
+
+  .head__nav,
+  .head__cta {
+    display: none;
+  }
+
+  .head__toggle {
+    display: block;
+  }
+
+  .head__panel {
+    inset: 72px 0 0;
+  }
+}
