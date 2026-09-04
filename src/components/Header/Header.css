@@ -7,8 +7,11 @@
   z-index: 90;
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition: background var(--t) var(--ease), border-color var(--t) var(--ease),
-    backdrop-filter var(--t) var(--ease);
+  /* backdrop-filter fica de fora da transição de propósito: animá-lo num
+     elemento fixed trava o hit-test do toque no mobile (o header some ao
+     toque logo depois de cruzar o limiar do scroll). Ele troca no corte,
+     só background e border-color deslizam. */
+  transition: background var(--t) var(--ease), border-color var(--t) var(--ease);
 }
 
 .head.is-scrolled {
@@ -91,6 +94,7 @@
   display: none;
   padding: 10px;
   margin-right: -10px;
+  touch-action: manipulation;
   color: var(--text-hi);
 }
 
