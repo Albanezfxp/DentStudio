@@ -17,8 +17,6 @@
 .head.is-scrolled {
   background: var(--ground-veil);
   border-bottom-color: var(--rule-gold);
-  backdrop-filter: blur(16px) saturate(130%);
-  -webkit-backdrop-filter: blur(16px) saturate(130%);
 }
 
 .head__bar {
@@ -26,6 +24,16 @@
   align-items: center;
   gap: var(--sp-lg);
   height: 84px;
+}
+
+/* O blur vive na barra, não no .head: um filtro no próprio elemento fixed
+   vira containing block dos descendentes fixed (o painel do menu), e a
+   altura do painel colapsa para a altura da barra. Aqui .head__bar não tem
+   position fixed nem contém o painel, então o painel continua se
+   posicionando contra a tela inteira. */
+.head.is-scrolled .head__bar {
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
 }
 
 .head__brand {
