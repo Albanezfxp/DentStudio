@@ -170,23 +170,40 @@
   color: var(--gold);
 }
 
-/* O gesto assinatura do hero: escolher um é apagar o outro. Vale para
-   ponteiro e para teclado, e o alvo pode ser a linha do índice ou a foto. */
-.hero__inner:has([data-doctor='dr-thomas']:hover) [data-doctor='dr-gabriel'],
+/* O gesto assinatura do hero: escolher um é apagar o outro. Para teclado
+   funciona em qualquer dispositivo; para ponteiro, só onde existe hover de
+   verdade — em toque o :hover fica "preso" depois do tap. */
 .hero__inner:has([data-doctor='dr-thomas']:focus-visible) [data-doctor='dr-gabriel'],
-.hero__inner:has([data-doctor='dr-gabriel']:hover) [data-doctor='dr-thomas'],
 .hero__inner:has([data-doctor='dr-gabriel']:focus-visible) [data-doctor='dr-thomas'] {
   opacity: 0.3;
 }
 
-.hero__inner:has([data-doctor='dr-thomas']:hover) .hero__fig[data-doctor='dr-thomas'],
-.hero__inner:has([data-doctor='dr-gabriel']:hover) .hero__fig[data-doctor='dr-gabriel'] {
-  opacity: 1;
-}
-
-.hero__fig:hover .portrait__img,
 .hero__fig:focus-visible .portrait__img {
   filter: saturate(0.85) contrast(1.02) brightness(0.92);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero__inner:has([data-doctor='dr-thomas']:hover) [data-doctor='dr-gabriel'],
+  .hero__inner:has([data-doctor='dr-gabriel']:hover) [data-doctor='dr-thomas'] {
+    opacity: 0.3;
+  }
+
+  .hero__inner:has([data-doctor='dr-thomas']:hover) .hero__fig[data-doctor='dr-thomas'],
+  .hero__inner:has([data-doctor='dr-gabriel']:hover) .hero__fig[data-doctor='dr-gabriel'] {
+    opacity: 1;
+  }
+
+  .hero__fig:hover .portrait__img {
+    filter: saturate(0.85) contrast(1.02) brightness(0.92);
+  }
+}
+
+/* Em toque, o retrato é só imagem: sem escurecer no tap e sem navegar para a
+   seção do dentista — a escolha continua disponível na linha do índice. */
+@media (hover: none) and (pointer: coarse) {
+  .hero__fig {
+    pointer-events: none;
+  }
 }
 
 /* Faixa de rodapé do hero: fatos reais, nunca métrica inventada. */
