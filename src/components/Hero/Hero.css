@@ -178,10 +178,6 @@
   opacity: 0.3;
 }
 
-.hero__fig:focus-visible .portrait__img {
-  filter: saturate(0.85) contrast(1.02) brightness(0.92);
-}
-
 @media (hover: hover) and (pointer: fine) {
   .hero__inner:has([data-doctor='dr-thomas']:hover) [data-doctor='dr-gabriel'],
   .hero__inner:has([data-doctor='dr-gabriel']:hover) [data-doctor='dr-thomas'] {
@@ -191,10 +187,6 @@
   .hero__inner:has([data-doctor='dr-thomas']:hover) .hero__fig[data-doctor='dr-thomas'],
   .hero__inner:has([data-doctor='dr-gabriel']:hover) .hero__fig[data-doctor='dr-gabriel'] {
     opacity: 1;
-  }
-
-  .hero__fig:hover .portrait__img {
-    filter: saturate(0.85) contrast(1.02) brightness(0.92);
   }
 }
 
