@@ -74,7 +74,7 @@ export const doctors: Doctor[] = [
     focus: "Harmonização Orofacial",
     facts: [
       { label: "Registro", value: "CRO-PB 12353" },
-      { value: "Harmonização Orofacial | Lentes em resina" },
+      { value: "Harmonização Orofacial \n Lentes em resina" },
     ],
     whatsapp: "https://wa.me/5583993897637",
     whatsappLabel: "(83) 99389-7637",
