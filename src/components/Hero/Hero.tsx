@@ -58,10 +58,7 @@ function Hero() {
                   }
                 />
               </div>
-              <span className="hero__fig-tag">
-                <span className="hero__fig-num">{doctor.index}</span>
-                {doctor.shortName}
-              </span>
+              <span className="hero__fig-tag">{doctor.shortName}</span>
             </a>
           ))}
         </div>
@@ -75,7 +72,6 @@ function Hero() {
                 href={`#${doctor.id}`}
                 style={{ "--reveal-step": 3 + i } as React.CSSProperties}
               >
-                <span className="hero__row-num">{doctor.index}</span>
                 <span className="hero__row-body">
                   <span className="hero__row-name">{doctor.name}</span>
                   <span className="hero__row-focus">{doctor.focus}</span>

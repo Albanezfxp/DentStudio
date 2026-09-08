@@ -5,10 +5,14 @@
 import thomasPortrait from "../assets/dr's/optimized/thito_clinic.jpg";
 import gabrielPortrait from "../assets/dr's/optimized/gm_clinic.jpg";
 
-/** Uma linha da ficha do dentista: rótulo curto + valor. Só credenciais e
- *  formação — serviço nenhum entra aqui, porque serviço é da clínica. */
+/** Uma linha da ficha do dentista. Só credenciais e formação — serviço
+ *  nenhum entra aqui, porque serviço é da clínica. */
 export interface DoctorFact {
-  label: string;
+  /** Opcional de propósito: nível de formação não se rótula. Os dois ainda
+   *  estão se especializando, e no Brasil só quem tem a especialidade
+   *  registrada no CRO pode anunciar "especialista"/"especialização". Sem
+   *  rótulo, a linha apenas declara a formação, sem reivindicar título. */
+  label?: string;
   value: string;
 }
 
@@ -46,15 +50,15 @@ export const doctors: Doctor[] = [
     role: "Cirurgião-Dentista",
     focus: "Dentística · Periodontia · Estética Avançada",
     facts: [
-      { label: "Registro", value: "CRO-PB 9999" },
+      { label: "Registro", value: "CRO-PB 12263" },
       {
         label: "Pós-graduação",
         value: "Dentística, Periodontia e Estética Avançada",
       },
-      { label: "Especialização", value: "Imersão em Gengivoplastia" },
+      { value: "Imersão em Gengivoplastia" },
     ],
     whatsapp: "https://wa.me/558399931455",
-    whatsappLabel: "(83) 9993-1455",
+    whatsappLabel: "(83) 99993-1455",
     portrait: thomasPortrait,
     portraitAlt: "Dr. Thomás Silva Vilas Boas na recepção da DentStudio",
     portraitPos: "center 34%",
@@ -70,7 +74,7 @@ export const doctors: Doctor[] = [
     focus: "Harmonização Orofacial",
     facts: [
       { label: "Registro", value: "CRO-PB 12353" },
-      { label: "Especialização", value: "Harmonização Orofacial" },
+      { value: "Harmonização Orofacial" },
     ],
     whatsapp: "https://wa.me/5583993897637",
     whatsappLabel: "(83) 99389-7637",

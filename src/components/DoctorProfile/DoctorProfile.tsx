@@ -43,14 +43,19 @@ function DoctorProfile({ doctor, reversed = false }: DoctorProfileProps) {
 
           {/* A área de atuação não se repete aqui: a ficha abaixo já a declara
               na forma formal, e o `focus` vive no hero e no CTA final. */}
-          <dl className="doc__facts reveal" style={{ '--reveal-step': 2 } as React.CSSProperties}>
+          {/* Lista, não <dl>: linha sem rótulo não tem termo a definir, e um
+              <dd> órfão quebraria o modelo de conteúdo da definição. */}
+          <ul className="doc__facts reveal" style={{ '--reveal-step': 2 } as React.CSSProperties}>
             {doctor.facts.map((fact) => (
-              <div className="doc__fact" key={fact.label}>
-                <dt>{fact.label}</dt>
-                <dd>{fact.value}</dd>
-              </div>
+              <li
+                className={`doc__fact${fact.label ? '' : ' doc__fact--bare'}`}
+                key={fact.value}
+              >
+                {fact.label ? <span className="doc__fact-label">{fact.label}</span> : null}
+                <span className="doc__fact-value">{fact.value}</span>
+              </li>
             ))}
-          </dl>
+          </ul>
 
           <div className="doc__action reveal" style={{ '--reveal-step': 3 } as React.CSSProperties}>
             <a className="btn btn--lg" href={doctor.whatsapp} target="_blank" rel="noreferrer">

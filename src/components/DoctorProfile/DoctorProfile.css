@@ -74,6 +74,8 @@
 
 .doc__facts {
   margin: var(--sp-md) 0 0;
+  padding: 0;
+  list-style: none;
   border-top: 1px solid var(--rule-gold);
 }
 
@@ -86,7 +88,13 @@
   border-bottom: 1px solid var(--rule);
 }
 
-.doc__fact dt {
+/* Sem rótulo a linha não volta para a margem: o valor fica na coluna dos
+   outros valores, senão a ficha perde o alinhamento que a faz parecer ficha. */
+.doc__fact--bare .doc__fact-value {
+  grid-column: 2;
+}
+
+.doc__fact-label {
   font-size: var(--fs-label);
   font-weight: 500;
   letter-spacing: var(--track-label);
@@ -94,8 +102,7 @@
   color: var(--text-mute);
 }
 
-.doc__fact dd {
-  margin: 0;
+.doc__fact-value {
   font-size: 1rem;
   font-weight: 300;
   color: var(--text-hi);
@@ -144,6 +151,11 @@
   .doc__fact {
     grid-template-columns: minmax(0, 1fr);
     gap: 4px;
+  }
+
+  /* Uma coluna só aqui — a segunda seria uma coluna implícita fantasma. */
+  .doc__fact--bare .doc__fact-value {
+    grid-column: 1;
   }
 }
 
