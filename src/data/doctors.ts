@@ -2,8 +2,8 @@
 // de 1,71 MB para 182 KB, o que pesa porque boa parte do público chega pelo
 // celular vindo de link. Os arquivos originais seguem intactos em
 // ../assets/dr's/ e são a fonte para regerar estas.
-import thomasPortrait from "../assets/dr's/optimized/thito_clinic.jpg";
-import gabrielPortrait from "../assets/dr's/optimized/gm_clinic.jpg";
+import thomasPortrait from "../assets/dr's/optimized/IMG_9972.png";
+import gabrielPortrait from "../assets/dr's/optimized/IMG_9973.png";
 
 /** Uma linha da ficha do dentista. Só credenciais e formação — serviço
  *  nenhum entra aqui, porque serviço é da clínica. */
