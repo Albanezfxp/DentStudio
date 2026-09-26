@@ -36,7 +36,8 @@ export interface Doctor {
   portraitAlt: string;
   /** object-position do retrato — cada foto enquadra o rosto de um jeito. */
   portraitPos: string;
-  /** Zoom do retrato — a foto do Dr. Gabriel é mais aberta que a do Dr. Thomás. */
+  /** Zoom do retrato. As duas fotos atuais têm o mesmo enquadramento, então
+   *  ambas ficam em 1 — só mude se uma foto nova vier mais aberta. */
   portraitZoom: number;
 }
 
@@ -61,7 +62,7 @@ export const doctors: Doctor[] = [
     whatsappLabel: "(83) 99993-1455",
     portrait: thomasPortrait,
     portraitAlt: "Dr. Thomás Silva Vilas Boas na recepção da DentStudio",
-    portraitPos: "center 34%",
+    portraitPos: "center 30%",
     portraitZoom: 1,
   },
   {
@@ -80,7 +81,7 @@ export const doctors: Doctor[] = [
     whatsappLabel: "(83) 99389-7637",
     portrait: gabrielPortrait,
     portraitAlt: "Dr. Gabriel Medeiros na recepção da DentStudio",
-    portraitPos: "center 14%",
-    portraitZoom: 1.34,
+    portraitPos: "center 30%",
+    portraitZoom: 1,
   },
 ];
